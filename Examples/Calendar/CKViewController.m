@@ -33,6 +33,13 @@
 
         calendar.onlyShowCurrentMonth = NO;
         calendar.adaptHeightToNumberOfWeeksInMonth = YES;
+        
+        //Example for multiple  selected dates
+        
+        [self.calendar selectDates:[[NSArray alloc] initWithObjects:
+                                    [self.dateFormatter dateFromString:@"5/12/2013"],
+                                    [self.dateFormatter dateFromString:@"6/12/2013"],
+                                    [self.dateFormatter dateFromString:@"7/12/2013"], nil]];
 
         calendar.frame = CGRectMake(10, 10, 300, 320);
         [self.view addSubview:calendar];

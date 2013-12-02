@@ -58,6 +58,7 @@ typedef enum {
 - (void)setDayOfWeekBottomColor:(UIColor *)bottomColor topColor:(UIColor *)topColor;
 
 - (void)selectDate:(NSDate *)date makeVisible:(BOOL)visible;
+- (void)selectDates:(NSArray *)datesToSelect;
 - (void)reloadData;
 - (void)reloadDates:(NSArray *)dates;
 

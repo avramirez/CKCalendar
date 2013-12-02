@@ -113,11 +113,13 @@
 @property(nonatomic, strong) NSArray *dayOfWeekLabels;
 @property(nonatomic, strong) NSMutableArray *dateButtons;
 @property(nonatomic, strong) NSDateFormatter *dateFormatter;
+@property(nonatomic,strong) NSMutableArray *datesToBeSelected;
 
 @property (nonatomic, strong) NSDate *monthShowing;
 @property (nonatomic, strong) NSDate *selectedDate;
 @property (nonatomic, strong) NSCalendar *calendar;
 @property(nonatomic, assign) CGFloat cellWidth;
+
 
 @end
 
@@ -147,6 +149,8 @@
     self.onlyShowCurrentMonth = YES;
     self.adaptHeightToNumberOfWeeksInMonth = YES;
 
+    self.datesToBeSelected = [[NSMutableArray alloc] init];
+    
     self.layer.cornerRadius = 6.0f;
 
     UIView *highlight = [[UIView alloc] initWithFrame:CGRectZero];
@@ -317,6 +321,10 @@
             [dateButton setTitleColor:item.textColor forState:UIControlStateNormal];
             dateButton.backgroundColor = item.backgroundColor;
         }
+        
+        if([self.datesToBeSelected containsObject:date]){
+            dateButton.backgroundColor = item.selectedBackgroundColor;
+        }
 
         dateButton.frame = [self _calculateDayCellFrame:date];
 
@@ -413,6 +421,10 @@
 - (void)reloadDates:(NSArray *)dates {
     // TODO: only update the dates specified
     [self setNeedsLayout];
+}
+
+- (void)selectDates:(NSArray *)datesToSelect{
+    [self.datesToBeSelected addObjectsFromArray:datesToSelect];
 }
 
 - (void)_setDefaultStyle {
